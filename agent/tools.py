@@ -4,8 +4,14 @@ from dotenv import load_dotenv
 import logging
 from objects import PurchaseItem
 from datetime import date
+import logging
 
 load_dotenv()
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
 
 @tool
 def get_user_purchase_history(user: str) -> dict:
@@ -49,24 +55,25 @@ def issue_refund_ticket(user: str, refund_amount: float) -> dict:
     """
     logging.info(f"Using issue_refund_ticket tool on user: {user}")
 
-    # For this example, we'll just return a success message.
     return {
         "status": "success",
         "message": f"Refund ticket issued for user {user} with a refund amount of ${refund_amount}."
     }
 
-
 @tool
-def get_current_date() -> str:
-    """This tool returns the current date in YYYY-MM-DD format."""
-    logging.info("Using get_current_date tool")
+def get_today_date() -> str:
+    """This tool returns today's date in YYYY-MM-DD format."""
+    logging.info("Using get_today_date tool")
     return date.today().isoformat()
 
 
-# print(get_user_purchase_history.invoke("user124"))
-print(calculate_right_refund.invoke({
-    "user124", 
-    [PurchaseItem(name="notebook"), PurchaseItem(name="pen")]
-    })
-)
-# print(get_current_date.invoke())
+# print(get_user_purchase_history.invoke("user123"))
+
+# print(calculate_right_refund.invoke({
+#     "user": "user123", 
+#     "items": [PurchaseItem(name="book"), PurchaseItem(name="pen")]
+#     }))
+
+# print(issue_refund_ticket.invoke({"user": "user123", "refund_amount": 30}))
+
+# print(get_today_date.invoke("user123"))

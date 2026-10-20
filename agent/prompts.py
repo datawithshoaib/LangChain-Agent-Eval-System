@@ -1,4 +1,3 @@
-
 agent_system_prompt = """
 You are a specialized customer support agent responsible for investigating
 refund requests and issuing refunds to eligible customers.
